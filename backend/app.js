@@ -5,6 +5,8 @@ const { celebrate, Joi, errors } = require('celebrate');
 const validator = require('validator');
 
 const auth = require('./middlewares/auth');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 const NotFoundError = require('./errors/not-found');
@@ -20,7 +22,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb');
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true })); // для приёма веб-страниц внутри POST-запроса
 app.use(express.json());
-
+app.use(requestLogger); // подключаем логгер запросов
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
@@ -50,6 +52,7 @@ app.all('*', (req, res, next) => {
   next(new NotFoundError('Ресурс не найден'));
 });
 
+app.use(errorLogger);
 app.use(errors());
 
 // eslint-disable-next-line no-unused-vars

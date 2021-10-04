@@ -1,0 +1,29 @@
+.button_type_save-btn {
+  width: 100%;
+  height: 50px;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  border: 0;
+  border-radius: 2px;
+  margin: 18px auto 37px;
+  cursor: pointer;
+  transition: all .3s;
+  background-color: #000;
+  color: white;
+  font-family: inherit;
+  padding: 0;
+}
+
+.button_type_save-btn:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 425px) {
+  .button_type_save-btn {
+    margin: 15px auto 25px;
+    font-size: 14px;
+    line-height: 17px;
+    height: 46px;
+  }
+}

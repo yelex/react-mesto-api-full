@@ -1,0 +1,28 @@
+.button_type_edit-btn {
+  background-image: url('../../../images/profile-pencil.svg');
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  background-color: #000;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid white;
+  margin: 0 0 0 18px;
+  color: #fff;
+  display: inline-block;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.button_type_edit-btn:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 320px){
+  .button_type_edit-btn {
+    width: 18px;
+    height: 18px;
+    margin: 0 0 0 10px;
+  }
+}

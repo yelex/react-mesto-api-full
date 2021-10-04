@@ -1,0 +1,9 @@
+.auth__list-item{
+    height: 26px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #CCCCCC;
+}
+      
+.auth__list-item:last-of-type{
+    margin-bottom: 216px;
+}

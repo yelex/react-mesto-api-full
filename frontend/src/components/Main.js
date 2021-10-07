@@ -24,6 +24,7 @@ function Main(props) {
             <section className="cards">
                 <ul className="cards__list">
                     { props.cards.map(card => {
+                        console.log(card);
 
                         return (
                                 <Card key={card._id} card={ card } 

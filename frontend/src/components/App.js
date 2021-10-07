@@ -36,11 +36,7 @@ function App() {
 
   React.useEffect(() => {
     handleTokenCheck();
-    Promise.all([api.getInfoAboutMeApi(), api.getInitialCardsFromApi()]).then(
-      ([userData, cardsData]) => {
-        setCurrentUser(userData);
-        setCards(cardsData);
-      }).catch(err => console.log(err))
+    setInitialData();
   }, [])
 
   React.useEffect(() => {
@@ -54,6 +50,14 @@ function App() {
     return () => document.removeEventListener('keydown', closeByEscape)
 }, [])
 
+  function setInitialData(){
+    api.getAllInitialData().then(
+      ([userData, cardsData]) => {
+        setCurrentUser(userData);
+        setCards(cardsData);
+      }).catch(err => console.log(err))
+  }
+
   function signOut(){
     localStorage.removeItem('jwt');
     setIsLoggedIn(false);
@@ -62,9 +66,11 @@ function App() {
 
   function handleLogin(email, password){
     authorize(email, password)
-      .then((data) => {
+      .then(() => {
+        console.log('im here')
         setUserEmail(email);
         setIsLoggedIn(true);
+        setInitialData();
         history.push('/');
       })
       .catch(err => {
@@ -96,23 +102,20 @@ function App() {
   }
 
   function handleTokenCheck(){
-    if (localStorage.getItem('jwt')){
-      const token = localStorage.getItem('jwt');
-      checkToken(token)
-      .then(({ data }) => {
-        setUserEmail(data.email)
-        setIsLoggedIn(true);
-      })
-      .catch(err => console.log(err)) // сюда придет 401 если пользователь неавторизован
-      .finally(()=>{
-        history.push(location.pathname);
-      })
-    }
+    checkToken()
+    .then((data) => {
+      setUserEmail(data.email);
+      setIsLoggedIn(true);
+    })
+    .catch(err => console.log(err)) // сюда придет 401 если пользователь неавторизован
+    .finally(()=>{
+      history.push(location.pathname);
+    })
   }
 
   function handleCardLike(card) {
       // Снова проверяем, есть ли уже лайк на этой карточке
-      const isLiked = card.likes.some(i => i._id === currentUser._id);
+      const isLiked = card.likes.some(i => i === currentUser._id);
       
       // Отправляем запрос в API и получаем обновлённые данные карточки
       api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {

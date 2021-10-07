@@ -39,7 +39,7 @@ class Api {
     }
   
     getAllInitialData() {
-      return Promise.all([this.getInitialCardsFromApi(), this.getInfoAboutMeApi()])
+      return Promise.all([this.getInfoAboutMeApi(), this.getInitialCardsFromApi()])
     }
   
     editProfileApi({ name, about }) {
@@ -76,7 +76,7 @@ class Api {
   
     changeLikeCardStatus(cardId, isLiked) {
       const requestMethod = isLiked ? 'PUT' : 'DELETE';
-      return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      return fetch(`${this._baseUrl}/cards/${cardId}/likes/`, {
         method: requestMethod,
         headers: this._headers
       })
@@ -96,9 +96,8 @@ class Api {
   }
 
 const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-23',
+    baseUrl: 'http://localhost:3000',
     headers: {
-      authorization: '58d9bd2a-6b34-4d93-8ca3-98d968550c4e',
       'Content-Type': 'application/json'
     }
   });

@@ -30,7 +30,6 @@ module.exports.createCard = (req, res, next) => Card.create({
     });
   })
   .catch((err) => {
-    console.log(err);
     if (err.name === 'ValidationError') {
       next(new BadRequestError('Переданы некорректные данные'));
       return;

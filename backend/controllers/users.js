@@ -55,10 +55,10 @@ module.exports.getInfoAboutMe = (req, res, next) => {
   User.findById({ _id: req.user._id })
     .then((user) => {
       const {
-        _id, name, about, avatar,
+        _id, name, about, avatar, email,
       } = user;
       res.send({
-        name, about, avatar, _id,
+        name, about, avatar, _id, email,
       });
     })
     .catch(() => {

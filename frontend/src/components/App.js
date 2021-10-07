@@ -103,7 +103,7 @@ function App() {
         setUserEmail(data.email)
         setIsLoggedIn(true);
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err)) // сюда придет 401 если пользователь неавторизован
       .finally(()=>{
         history.push(location.pathname);
       })

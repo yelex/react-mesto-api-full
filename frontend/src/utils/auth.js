@@ -33,7 +33,7 @@ export const authorize = (email, password) => {
   .then((data) => {
 
     if (data.token){
-      localStorage.setItem('jwt', data.token);
+      // localStorage.setItem('jwt', data.token);
       
       return data;
     } 
@@ -50,7 +50,13 @@ export const checkToken = (token) => {
     }
   })
   .then((res) => {
-    return api.getResponseData(res);
+    return api.getResponseData(res); 
+    // сначала на бэке отработает 
+    // мидлвара auth, которая вернет 401 если 
+    // пользователь неавторизован, потом отработает 
+    // метод getInfoAboutMe, который вернет {
+    //   name, about, avatar, _id,
+    // }
   })
   .then(data => data)
 }

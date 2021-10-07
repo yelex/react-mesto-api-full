@@ -23,6 +23,26 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true })); // для приёма веб-страниц внутри POST-запроса
 app.use(express.json());
 app.use(requestLogger); // подключаем логгер запросов
+
+// CORS
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  const { method } = req; // Сохраняем тип запроса (HTTP-метод) в соответствующую переменную
+
+  // Значение для заголовка Access-Control-Allow-Methods по умолчанию (разрешены все типы запросов)
+  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
+  const requestHeaders = req.headers['access-control-request-headers'];
+  // Если это предварительный запрос, добавляем нужные заголовки
+  if (method === 'OPTIONS') {
+    // разрешаем любые заголовки
+    res.header('Access-Control-Allow-Headers', requestHeaders);
+    // разрешаем кросс-доменные запросы любых типов (по умолчанию)
+    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
+    return res.end(); // возможно нужно удалить
+  }
+  return next();
+});
+
 app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),

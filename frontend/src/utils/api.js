@@ -96,7 +96,7 @@ class Api {
   }
 
 const api = new Api({
-    baseUrl: 'http://localhost:3000',
+    baseUrl: 'https://api.yellex.nomoredomains.club',
     headers: {
       'Content-Type': 'application/json'
     }

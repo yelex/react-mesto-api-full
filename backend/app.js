@@ -19,6 +19,8 @@ const app = express();
 
 mongoose.connect('mongodb://localhost:27017/mestodb');
 
+require('dotenv').config();
+
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true })); // для приёма веб-страниц внутри POST-запроса
 app.use(express.json());

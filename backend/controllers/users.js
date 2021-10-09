@@ -7,6 +7,8 @@ const ConflictError = require('../errors/conflict'); // 409
 const BadRequestError = require('../errors/bad-request'); // 400
 const UnauthorizedError = require('../errors/unauthorized'); // 401
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 module.exports.getUsers = (req, res, next) => {
   User.find({})
     .then((users) => res.send(users.map((user) => {
@@ -145,7 +147,6 @@ module.exports.createUser = (req, res, next) => {
         });
       })
       .catch((err) => {
-        console.log(err);
         if (err.name === 'ValidationError') {
           next(new BadRequestError('Переданы некорректные данные'));
           return;
@@ -164,7 +165,7 @@ module.exports.login = (req, res, next) => {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, 'dev-secret');
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
 
       res
         .cookie('jwt', token, {

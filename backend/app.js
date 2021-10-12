@@ -37,6 +37,8 @@ app.use((req, res, next) => {
   // Если это предварительный запрос, добавляем нужные заголовки
   if (method === 'OPTIONS') {
     // разрешаем любые заголовки
+
+    res.header('Access-Control-Allow-Credentials', 'true');
     res.header('Access-Control-Allow-Headers', requestHeaders);
     // разрешаем кросс-доменные запросы любых типов (по умолчанию)
     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);

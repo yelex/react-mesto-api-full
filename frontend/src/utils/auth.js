@@ -25,7 +25,8 @@ export const authorize = (email, password) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({password, email})
+    body: JSON.stringify({password, email}),
+    credentials: 'include',
   }).then(res => {
     return api.getResponseData(res)})
 

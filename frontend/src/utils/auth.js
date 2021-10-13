@@ -8,7 +8,8 @@ export const register = (email, password) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({email, password})
+    body: JSON.stringify({email, password}),
+    credentials: 'include',
   })
   .then((res) => {
     return api.getResponseData(res);
@@ -25,7 +26,8 @@ export const authorize = (email, password) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({password, email})
+    body: JSON.stringify({password, email}),
+    credentials: 'include'
   }).then(res => {
     return api.getResponseData(res)})
 
@@ -36,7 +38,8 @@ export const checkToken = () => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-    }
+    },
+    credentials: 'include',
   })
   .then((res) => {
     return api.getResponseData(res); 

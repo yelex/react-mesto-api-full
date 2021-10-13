@@ -13,7 +13,8 @@ class Api {
   
     getInitialCardsFromApi() {
       return fetch(`${this._baseUrl}/cards`, {
-        headers: this._headers
+        headers: this._headers,
+        credentials: 'include',
       })
         .then(res => this.getResponseData(res))
     }
@@ -21,6 +22,7 @@ class Api {
     getInfoAboutMeApi() {
       return fetch(`${this._baseUrl}/users/me`, {
         headers: this._headers,
+        credentials: 'include',
       })
         .then(res => this.getResponseData(res))
     }
@@ -33,7 +35,8 @@ class Api {
         body: JSON.stringify({
           name: name,
           about: about
-        })
+        }),
+        credentials: 'include',
       })
         .then(res => this.getResponseData(res))
     }
@@ -49,7 +52,8 @@ class Api {
         body: JSON.stringify({
           name,
           about
-        })
+        }),
+        credentials: 'include',
       })
       .then(res => this.getResponseData(res))
     }
@@ -61,7 +65,8 @@ class Api {
         body: JSON.stringify({
           name: title,
           link: link
-        })
+        }),
+        credentials: 'include',
       })
         .then(res => this.getResponseData(res))
     }
@@ -69,7 +74,8 @@ class Api {
     removeCardApi(cardId) {
       return fetch(`${this._baseUrl}/cards/${cardId}`, {
         method: 'DELETE',
-        headers: this._headers
+        headers: this._headers,
+        credentials: 'include',
       })
         .then(res => this.getResponseData(res))
     }
@@ -78,7 +84,8 @@ class Api {
       const requestMethod = isLiked ? 'PUT' : 'DELETE';
       return fetch(`${this._baseUrl}/cards/${cardId}/likes/`, {
         method: requestMethod,
-        headers: this._headers
+        headers: this._headers,
+        credentials: 'include',
       })
         .then(res => this.getResponseData(res))
       }
@@ -88,8 +95,9 @@ class Api {
         method: 'PATCH',
         headers: this._headers,
         body: JSON.stringify({
-          avatar: avatarLink
-        })
+          avatar: avatarLink,
+        }),
+        credentials: 'include',
       })
         .then(res => this.getResponseData(res))
     }

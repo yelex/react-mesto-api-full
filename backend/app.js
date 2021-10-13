@@ -28,7 +28,8 @@ app.use(requestLogger); // подключаем логгер запросов
 
 // CORS
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'https://yellex.nomoredomains.club');
+  res.header('Access-Control-Allow-Credentials', 'true');
   const { method } = req; // Сохраняем тип запроса (HTTP-метод) в соответствующую переменную
 
   // Значение для заголовка Access-Control-Allow-Methods по умолчанию (разрешены все типы запросов)

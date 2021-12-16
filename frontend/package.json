@@ -17,7 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && scp -r ./build/* yellex@62.84.115.39:/home/yellex/mesto-frontend"
+    "deploy": "npm run build && scp -r ./build/* yellex@51.250.12.149:/home/yellex/mesto-frontend"
   },
   "eslintConfig": {
     "extends": [
